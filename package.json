@@ -7,8 +7,8 @@
     "lib/**/*"
   ],
   "dependencies": {
-    "detritus-rest": "^0.7.0",
-    "detritus-utils": "^0.4.0"
+    "detritus-rest": "*",
+    "detritus-utils": "*"
   },
   "description": "A minimalistic TypeScript library to interact with all, or most, of Discord's rest endpoints",
   "devDependencies": {
@@ -32,7 +32,6 @@
   },
   "scripts": {
     "build": "tsc",
-    "prepare": "npm run build",
     "test": "echo \"Error: no test specified\" && exit 1",
     "typedoc": "typedoc"
   },

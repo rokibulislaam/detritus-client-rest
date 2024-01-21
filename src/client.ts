@@ -93,8 +93,8 @@ export class Client extends EventSpewer {
     }, options);
 
     options.headers = createHeaders(options.headers);
-    if (!options.headers.has(HTTPHeaders.USER_AGENT)) {
-      options.headers.set(HTTPHeaders.USER_AGENT, defaultHeaders[HTTPHeaders.USER_AGENT]);
+    if (!(options.headers as Headers).has(HTTPHeaders.USER_AGENT)) {
+      (options.headers as Headers).set(HTTPHeaders.USER_AGENT, defaultHeaders[HTTPHeaders.USER_AGENT]);
     }
     this.restClient = new RestClient(options);
 
@@ -1549,7 +1549,7 @@ export class Client extends EventSpewer {
     }
     if (options.messageReference && typeof(options.messageReference) === 'object') {
       body.message_reference = {
-        channel_id: options.messageReference.channelId,
+        channel_id: options.messageReference.channelId ?? '',
         fail_if_not_exists: options.messageReference.failIfNotExists,
         guild_id: options.messageReference.guildId,
         message_id: options.messageReference.messageId,
@@ -3667,10 +3667,10 @@ export class Client extends EventSpewer {
     if (compatibleType) {
       switch (compatibleType) {
         case 'github': {
-          route.path = Api.WEBHOOK_TOKEN_GITHUB;
+          route.path = Api.WEBHOOK_TOKEN_GITHUB as typeof route.path;
         }; break;
         case 'slack': {
-          route.path = Api.WEBHOOK_TOKEN_SLACK;
+          route.path = Api.WEBHOOK_TOKEN_SLACK as typeof route.path;
         }; break;
         default: {
           throw new Error('Invalid Webhook Compatibility Type');
